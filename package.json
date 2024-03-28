@@ -2,6 +2,7 @@
   "name": "partypolls",
   "version": "0.1.0",
   "private": true,
+  "platform": "node",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,20 +10,24 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@confluentinc/kafka-javascript": "^0.1.11-devel",
+    "next": "13.5.4",
+    "next-auth": "^4.24.3",
+    "partysocket": "1.0.1",
     "react": "^18",
     "react-dom": "^18",
-    "next": "13.5.4",
-    "next-auth": "^4.24.3"
+    "tls": "^0.0.1"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10",
+    "eslint": "^8",
+    "eslint-config-next": "13.5.4",
+    "partykit": "0.0.101",
     "postcss": "^8",
     "tailwindcss": "^3",
-    "eslint": "^8",
-    "eslint-config-next": "13.5.4"
+    "typescript": "^5"
   }
 }

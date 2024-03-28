@@ -2,8 +2,7 @@
 
 import { PARTYKIT_HOST } from "@/app/env";
 import { Poll } from "@/app/types";
-// 🎈 TODO: uncomment the import
-// import usePartySocket from "partysocket/react";
+import usePartySocket from "partysocket/react";
 import { useEffect, useState } from "react";
 import PollOptions from "./PollOptions";
 
@@ -19,11 +18,25 @@ export default function PollUI({
   const [votes, setVotes] = useState<number[]>(initialVotes ?? []);
   const [vote, setVote] = useState<number | null>(null);
 
-  // 🎈 TODO: add usePartySocket hook
+  const socket = usePartySocket({
+    host: PARTYKIT_HOST,
+    room: id,
+    onMessage(event) {
+      const message = JSON.parse(event.data) as Poll;
+      if (message.votes) {
+        setVotes(message.votes);
+      }
+    }
+  });
 
   const sendVote = (option: number) => {
     if (vote === null) {
-      // 🎈 TODO: send message via WebSockets
+      const sendVote = (option: number) => {
+        if (vote === null) {
+          socket.send(JSON.stringify({ type: "vote", option }));
+          setVote(option);
+        }
+      };
       setVote(option);
     }
   };
